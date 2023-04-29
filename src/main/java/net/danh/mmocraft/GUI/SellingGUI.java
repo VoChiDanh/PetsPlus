@@ -1,6 +1,7 @@
 package net.danh.mmocraft.GUI;
 
 import io.github.rysefoxx.inventory.plugin.content.InventoryProvider;
+import io.github.rysefoxx.inventory.plugin.enums.Action;
 import io.github.rysefoxx.inventory.plugin.enums.DisabledEvents;
 import io.github.rysefoxx.inventory.plugin.enums.DisabledInventoryClick;
 import io.github.rysefoxx.inventory.plugin.other.EventCreator;
@@ -26,9 +27,11 @@ public class SellingGUI {
     public static RyseInventory getSellingGUI() {
         return RyseInventory.builder()
                 .title("Bán Đồ")
-                .rows(3)
+                .rows(6)
+                .ignoredSlots(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53)
                 .ignoreEvents(DisabledEvents.INVENTORY_DRAG)
                 .ignoreClickEvent(DisabledInventoryClick.BOTH)
+                .enableAction(Action.MOVE_TO_OTHER_INVENTORY, Action.DOUBLE_CLICK)
                 .provider(new InventoryProvider() {
                 })
                 .listener(new EventCreator<>(InventoryCloseEvent.class, e -> {
@@ -179,7 +182,7 @@ public class SellingGUI {
 
     public static void sellItem(Player p, ItemStack itemStack) {
         File.getConfig().getStringList("sell.command").forEach(cmd -> {
-            int integer = getItemPrice(itemStack);
+            int integer = getItemPrice(itemStack) * itemStack.getAmount();
             String c = cmd.replace("<player>", p.getName()).replace("<price>", String.valueOf(integer));
             new BukkitRunnable() {
                 @Override

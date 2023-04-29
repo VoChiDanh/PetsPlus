@@ -109,7 +109,7 @@ public class CraftingGUI {
                         }
                     }
                 }).ignoredSlots(10, 11, 12, 19, 20, 21, 28, 29, 30, 24)
-                .enableAction(Action.MOVE_TO_OTHER_INVENTORY)
+                .enableAction(Action.MOVE_TO_OTHER_INVENTORY, Action.DOUBLE_CLICK)
                 .ignoreClickEvent(DisabledInventoryClick.BOTTOM)
                 .listener(new EventCreator<>(InventoryCloseEvent.class, e -> {
                     for (int slot : Arrays.asList(10, 11, 12, 19, 20, 21, 28, 29, 30, 24)) {
