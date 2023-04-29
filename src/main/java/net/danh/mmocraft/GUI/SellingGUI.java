@@ -1,6 +1,5 @@
 package net.danh.mmocraft.GUI;
 
-import io.github.rysefoxx.inventory.plugin.content.InventoryContents;
 import io.github.rysefoxx.inventory.plugin.content.InventoryProvider;
 import io.github.rysefoxx.inventory.plugin.enums.DisabledEvents;
 import io.github.rysefoxx.inventory.plugin.enums.DisabledInventoryClick;
@@ -31,9 +30,6 @@ public class SellingGUI {
                 .ignoreEvents(DisabledEvents.INVENTORY_DRAG)
                 .ignoreClickEvent(DisabledInventoryClick.BOTH)
                 .provider(new InventoryProvider() {
-                    @Override
-                    public void init(Player player, InventoryContents contents) {
-                    }
                 })
                 .listener(new EventCreator<>(InventoryCloseEvent.class, e -> {
                     if (e.getPlayer() instanceof Player p) {
@@ -61,119 +57,121 @@ public class SellingGUI {
     public static int getItemPrice(ItemStack itemStack) {
         NBTItem nbtItem = NBTItem.get(itemStack);
         if (nbtItem.hasType()) {
-            String mmo_pre = ChatColor.stripColor(Chat.colorize(nbtItem.get("MMOITEMS_NAME_PRE").toString().replace("[", "").replace("]", "").replace("\"", "")));
-            List<String> list_bonus = Arrays.stream(mmo_pre.split(",")).toList();
             AtomicInteger integer = new AtomicInteger(getPrice(itemStack));
-            list_bonus.forEach(bonus -> {
-                if (bonus.contains("PD")) {
-                    integer.addAndGet(Number.getInteger(File.getConfig().getString("sell.base.PD.NORMAL")));
-                    if (bonus.contains("+")) {
-                        int count = 0;
-                        for (int i = 0; i < bonus.length(); i++) {
-                            if (bonus.charAt(i) == '+') {
-                                count++;
+            if (nbtItem.get("MMOITEMS_NAME_PRE") != null) {
+                String mmo_pre = ChatColor.stripColor(Chat.colorize(nbtItem.get("MMOITEMS_NAME_PRE").toString().replace("[", "").replace("]", "").replace("\"", "")));
+                List<String> list_bonus = Arrays.stream(mmo_pre.split(",")).toList();
+                list_bonus.forEach(bonus -> {
+                    if (bonus.contains("PD")) {
+                        integer.addAndGet(Number.getInteger(File.getConfig().getString("sell.base.PD.NORMAL")));
+                        if (bonus.contains("+")) {
+                            int count = 0;
+                            for (int i = 0; i < bonus.length(); i++) {
+                                if (bonus.charAt(i) == '+') {
+                                    count++;
+                                }
                             }
+                            integer.addAndGet(count * Number.getInteger(File.getConfig().getString("sell.base.PD.PLUS")));
                         }
-                        integer.addAndGet(count * Number.getInteger(File.getConfig().getString("sell.base.PD.PLUS")));
                     }
-                }
-                if (bonus.contains("MH")) {
-                    integer.addAndGet(Number.getInteger(File.getConfig().getString("sell.base.MH.NORMAL")));
-                    if (bonus.contains("+")) {
-                        int count = 0;
-                        for (int i = 0; i < bonus.length(); i++) {
-                            if (bonus.charAt(i) == '+') {
-                                count++;
+                    if (bonus.contains("MH")) {
+                        integer.addAndGet(Number.getInteger(File.getConfig().getString("sell.base.MH.NORMAL")));
+                        if (bonus.contains("+")) {
+                            int count = 0;
+                            for (int i = 0; i < bonus.length(); i++) {
+                                if (bonus.charAt(i) == '+') {
+                                    count++;
+                                }
                             }
+                            integer.addAndGet(count * Number.getInteger(File.getConfig().getString("sell.base.MH.PLUS")));
                         }
-                        integer.addAndGet(count * Number.getInteger(File.getConfig().getString("sell.base.MH.PLUS")));
                     }
-                }
-                if (bonus.contains("CSP")) {
-                    integer.addAndGet(Number.getInteger(File.getConfig().getString("sell.base.CSP.NORMAL")));
-                    if (bonus.contains("+")) {
-                        int count = 0;
-                        for (int i = 0; i < bonus.length(); i++) {
-                            if (bonus.charAt(i) == '+') {
-                                count++;
+                    if (bonus.contains("CSP")) {
+                        integer.addAndGet(Number.getInteger(File.getConfig().getString("sell.base.CSP.NORMAL")));
+                        if (bonus.contains("+")) {
+                            int count = 0;
+                            for (int i = 0; i < bonus.length(); i++) {
+                                if (bonus.charAt(i) == '+') {
+                                    count++;
+                                }
                             }
+                            integer.addAndGet(count * Number.getInteger(File.getConfig().getString("sell.base.CSP.PLUS")));
                         }
-                        integer.addAndGet(count * Number.getInteger(File.getConfig().getString("sell.base.CSP.PLUS")));
                     }
-                }
-                if (bonus.contains("MM")) {
-                    integer.addAndGet(Number.getInteger(File.getConfig().getString("sell.base.MM.NORMAL")));
-                    if (bonus.contains("+")) {
-                        int count = 0;
-                        for (int i = 0; i < bonus.length(); i++) {
-                            if (bonus.charAt(i) == '+') {
-                                count++;
+                    if (bonus.contains("MM")) {
+                        integer.addAndGet(Number.getInteger(File.getConfig().getString("sell.base.MM.NORMAL")));
+                        if (bonus.contains("+")) {
+                            int count = 0;
+                            for (int i = 0; i < bonus.length(); i++) {
+                                if (bonus.charAt(i) == '+') {
+                                    count++;
+                                }
                             }
+                            integer.addAndGet(count * Number.getInteger(File.getConfig().getString("sell.base.M.PLUS")));
                         }
-                        integer.addAndGet(count * Number.getInteger(File.getConfig().getString("sell.base.M.PLUS")));
                     }
-                }
-                if (bonus.contains("CSC")) {
-                    integer.addAndGet(Number.getInteger(File.getConfig().getString("sell.base.CSC.NORMAL")));
-                    if (bonus.contains("+")) {
-                        int count = 0;
-                        for (int i = 0; i < bonus.length(); i++) {
-                            if (bonus.charAt(i) == '+') {
-                                count++;
+                    if (bonus.contains("CSC")) {
+                        integer.addAndGet(Number.getInteger(File.getConfig().getString("sell.base.CSC.NORMAL")));
+                        if (bonus.contains("+")) {
+                            int count = 0;
+                            for (int i = 0; i < bonus.length(); i++) {
+                                if (bonus.charAt(i) == '+') {
+                                    count++;
+                                }
                             }
+                            integer.addAndGet(count * Number.getInteger(File.getConfig().getString("sell.base.CSC.PLUS")));
                         }
-                        integer.addAndGet(count * Number.getInteger(File.getConfig().getString("sell.base.CSC.PLUS")));
                     }
-                }
-                if (bonus.contains("A")) {
-                    integer.addAndGet(Number.getInteger(File.getConfig().getString("sell.base.A.NORMAL")));
-                    if (bonus.contains("+")) {
-                        int count = 0;
-                        for (int i = 0; i < bonus.length(); i++) {
-                            if (bonus.charAt(i) == '+') {
-                                count++;
+                    if (bonus.contains("A")) {
+                        integer.addAndGet(Number.getInteger(File.getConfig().getString("sell.base.A.NORMAL")));
+                        if (bonus.contains("+")) {
+                            int count = 0;
+                            for (int i = 0; i < bonus.length(); i++) {
+                                if (bonus.charAt(i) == '+') {
+                                    count++;
+                                }
                             }
+                            integer.addAndGet(count * Number.getInteger(File.getConfig().getString("sell.base.A.PLUS")));
                         }
-                        integer.addAndGet(count * Number.getInteger(File.getConfig().getString("sell.base.A.PLUS")));
                     }
-                }
-                if (bonus.contains("AD")) {
-                    integer.addAndGet(Number.getInteger(File.getConfig().getString("sell.base.AD.NORMAL")));
-                    if (bonus.contains("+")) {
-                        int count = 0;
-                        for (int i = 0; i < bonus.length(); i++) {
-                            if (bonus.charAt(i) == '+') {
-                                count++;
+                    if (bonus.contains("AD")) {
+                        integer.addAndGet(Number.getInteger(File.getConfig().getString("sell.base.AD.NORMAL")));
+                        if (bonus.contains("+")) {
+                            int count = 0;
+                            for (int i = 0; i < bonus.length(); i++) {
+                                if (bonus.charAt(i) == '+') {
+                                    count++;
+                                }
                             }
+                            integer.addAndGet(count * Number.getInteger(File.getConfig().getString("sell.base.AD.PLUS")));
                         }
-                        integer.addAndGet(count * Number.getInteger(File.getConfig().getString("sell.base.AD.PLUS")));
                     }
-                }
-                if (bonus.contains("HR")) {
-                    integer.addAndGet(Number.getInteger(File.getConfig().getString("sell.base.HR.NORMAL")));
-                    if (bonus.contains("+")) {
-                        int count = 0;
-                        for (int i = 0; i < bonus.length(); i++) {
-                            if (bonus.charAt(i) == '+') {
-                                count++;
+                    if (bonus.contains("HR")) {
+                        integer.addAndGet(Number.getInteger(File.getConfig().getString("sell.base.HR.NORMAL")));
+                        if (bonus.contains("+")) {
+                            int count = 0;
+                            for (int i = 0; i < bonus.length(); i++) {
+                                if (bonus.charAt(i) == '+') {
+                                    count++;
+                                }
                             }
+                            integer.addAndGet(count * Number.getInteger(File.getConfig().getString("sell.base.HR.PLUS")));
                         }
-                        integer.addAndGet(count * Number.getInteger(File.getConfig().getString("sell.base.HR.PLUS")));
                     }
-                }
-                if (bonus.contains("MD")) {
-                    integer.addAndGet(Number.getInteger(File.getConfig().getString("sell.base.MD.NORMAL")));
-                    if (bonus.contains("+")) {
-                        int count = 0;
-                        for (int i = 0; i < bonus.length(); i++) {
-                            if (bonus.charAt(i) == '+') {
-                                count++;
+                    if (bonus.contains("MD")) {
+                        integer.addAndGet(Number.getInteger(File.getConfig().getString("sell.base.MD.NORMAL")));
+                        if (bonus.contains("+")) {
+                            int count = 0;
+                            for (int i = 0; i < bonus.length(); i++) {
+                                if (bonus.charAt(i) == '+') {
+                                    count++;
+                                }
                             }
+                            integer.addAndGet(count * Number.getInteger(File.getConfig().getString("sell.base.MD.PLUS")));
                         }
-                        integer.addAndGet(count * Number.getInteger(File.getConfig().getString("sell.base.MD.PLUS")));
                     }
-                }
-            });
+                });
+            }
             return integer.get();
         }
         return 0;
