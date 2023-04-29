@@ -1,1 +1,45 @@
 debug: false
+sell:
+  command:
+    - "money give <player> <price> -s"
+  price:
+    KIEM;1: 5
+    GAYPHEP;1: 5
+    ARMOR;1O1: 5
+    ARMOR;1O2: 5
+    ARMOR;1O3: 5
+    ARMOR;1O4: 5
+    KIEM;2: 10
+    GAYPHEP;2: 10
+    ARMOR;2O1: 10
+    ARMOR;2O2: 10
+    ARMOR;2O3: 10
+    ARMOR;2O4: 10
+  base:
+    PD:
+      NORMAL: 1-5
+      PLUS: 5-10
+    MH:
+      NORMAL: 1-5
+      PLUS: 5-10
+    CSP:
+      NORMAL: 5-10
+      PLUS: 10-15
+    MM:
+      NORMAL: 5-10
+      PLUS: 10-15
+    CSC:
+      NORMAL: 10-15
+      PLUS: 15-20
+    A:
+      NORMAL: 10-15
+      PLUS: 15-20
+    MD:
+      NORMAL: 15-20
+      PLUS: 20-25
+    AD:
+      NORMAL: 15-20
+      PLUS: 20-25
+    HR:
+      NORMAL: 15-20
+      PLUS: 20-25

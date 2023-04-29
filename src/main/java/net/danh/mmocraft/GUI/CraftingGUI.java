@@ -156,15 +156,21 @@ public class CraftingGUI {
                                                                                     if (result_string[0].equalsIgnoreCase("MMOITEMS")) {
                                                                                         ItemStack result_item = MMOItems.plugin.getItem(result_string[1], result_string[2]);
                                                                                         if (result_item != null) {
-                                                                                            if (e.getInventory().getItem(24) != null) {
+                                                                                            if (e.getInventory().getItem(24) == null) {
                                                                                                 for (int clear_slot : Arrays.asList(10, 11, 12, 19, 20, 21, 28, 29, 30)) {
                                                                                                     ItemStack i = e.getInventory().getItem(clear_slot);
                                                                                                     if (i != null) {
-                                                                                                        e.getInventory().setItem(clear_slot, null);
+                                                                                                        if (i.getAmount() == 1) {
+                                                                                                            e.getInventory().setItem(clear_slot, null);
+                                                                                                        }
+                                                                                                        if (i.getAmount() > 1) {
+                                                                                                            i.setAmount(i.getAmount() - 1);
+                                                                                                        }
                                                                                                     }
                                                                                                 }
                                                                                                 e.getInventory().setItem(24, result_item);
-                                                                                            } else Chat.sendPlayerMessage(p, File.getMessage().getString("da_co_vat_pham"));
+                                                                                            } else
+                                                                                                Chat.sendPlayerMessage(p, File.getMessage().getString("da_co_vat_pham"));
                                                                                         }
                                                                                     }
                                                                                 }

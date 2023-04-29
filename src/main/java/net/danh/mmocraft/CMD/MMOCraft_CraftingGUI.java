@@ -2,6 +2,8 @@ package net.danh.mmocraft.CMD;
 
 import net.danh.mmocraft.GUI.CraftingGUI;
 import net.danh.mmocraft.GUI.PreCraftingGUI;
+import net.danh.mmocraft.GUI.SellingGUI;
+import net.danh.mmocraft.Resources.Chat;
 import net.danh.mmocraft.Resources.File;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -28,6 +30,11 @@ public class MMOCraft_CraftingGUI extends CMDBase {
             }
         }
         if (args.length >= 1 && args.length <= 2) {
+            if (args[0].equalsIgnoreCase("sell")) {
+                if (c instanceof Player p) {
+                    SellingGUI.getSellingGUI().open(p);
+                }
+            }
             if (args[0].equalsIgnoreCase("craft")) {
                 if (c instanceof Player) {
                     CraftingGUI.getCraftingGUI().open((Player) c);
@@ -37,6 +44,7 @@ public class MMOCraft_CraftingGUI extends CMDBase {
                         Player p = Bukkit.getPlayer(args[1]);
                         if (p != null) {
                             CraftingGUI.getCraftingGUI().open(p);
+                            Chat.sendPlayerMessage(p, "&bHãy đặt vật phẩm cần bán vào GUI và thoát gui ra để bán!");
                         }
                     }
                 }
@@ -67,6 +75,7 @@ public class MMOCraft_CraftingGUI extends CMDBase {
             }
             commands.add("craft");
             commands.add("preview");
+            commands.add("sell");
             StringUtil.copyPartialMatches(args[0], commands, completions);
         }
         Collections.sort(completions);

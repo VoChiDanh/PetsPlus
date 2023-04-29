@@ -52,15 +52,21 @@ public class PreCraftingGUI {
                             if (cc[1].equalsIgnoreCase("CLASS")) {
                                 if (MMOCore.plugin.classManager.has(cc[2])) {
                                     if (PlayerData.get(p).getProfess().getId().equalsIgnoreCase(cc[2])) {
-                                        if (PlayerData.get(p).getLevel() >= Number.getInteger(cc[3])) {
-                                            String[] result_string = new String[0];
-                                            if (result != null) {
-                                                result_string = result.split(";");
-                                            }
-                                            if (result_string[0].equalsIgnoreCase("MMOITEMS")) {
-                                                ItemStack result_item = MMOItems.plugin.getItem(result_string[1], result_string[2]);
-                                                if (result_item != null) {
+                                        String[] result_string = new String[0];
+                                        if (result != null) {
+                                            result_string = result.split(";");
+                                        }
+                                        if (result_string[0].equalsIgnoreCase("MMOITEMS")) {
+                                            ItemStack result_item = MMOItems.plugin.getItem(result_string[1], result_string[2]);
+                                            if (result_item != null) {
+                                                if (PlayerData.get(p).getLevel() >= Number.getInteger(cc[3])) {
                                                     contents.set(slot, result_item);
+                                                } else {
+                                                    ItemStack fill = new ItemBuilder(new ItemStack(Material.RED_STAINED_GLASS_PANE))
+                                                            .displayName(Chat.colorize("&cChưa Mở Khóa"))
+                                                            .lore(Chat.colorize("&6Bạn cần đạt đến cấp độ &a" + Number.getInteger(cc[3]), "&6Để có thể chế tạo được vật phẩm này"))
+                                                            .build();
+                                                    contents.set(slot, fill);
                                                 }
                                             }
                                         }
