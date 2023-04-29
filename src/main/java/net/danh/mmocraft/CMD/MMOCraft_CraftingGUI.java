@@ -33,13 +33,13 @@ public class MMOCraft_CraftingGUI extends CMDBase {
             if (args[0].equalsIgnoreCase("sell")) {
                 if (c instanceof Player p) {
                     SellingGUI.getSellingGUI().open(p);
+                    Chat.sendPlayerMessage(p, "&bHãy đặt vật phẩm cần bán vào GUI và thoát gui ra để bán!");
+                    Chat.sendPlayerMessage(p, "&bVui lòng không bán bừa bãi dẫn đến mất vật phẩm admin không chịu trách nhiệm");
                 }
             }
             if (args[0].equalsIgnoreCase("craft")) {
                 if (c instanceof Player p) {
-                    CraftingGUI.getCraftingGUI().open((Player) c);
-                    Chat.sendPlayerMessage(p, "&bHãy đặt vật phẩm cần bán vào GUI và thoát gui ra để bán!");
-                    Chat.sendPlayerMessage(p, "&bVui lòng không bán bừa bãi dẫn đến mất vật phẩm admin không chịu trách nhiệm");
+                    CraftingGUI.getCraftingGUI().open(p);
                 }
                 if (c instanceof ConsoleCommandSender) {
                     if (args[1] != null) {
