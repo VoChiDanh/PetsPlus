@@ -1,0 +1,16 @@
+name: MMOCraft
+version: '${project.version}'
+main: net.danh.mmocraft.MMOCraft
+api-version: 1.16
+author: VoChiDanh
+description: Custom CraftingGUI For RPG Server
+depend:
+  - MMOItems
+  - MythicLib
+  - MMOCore
+commands:
+  MMOCraft_CraftingGUI:
+    description: CraftingGUI Command
+    aliases:
+      - CraftingGUI
+      - CGUI
