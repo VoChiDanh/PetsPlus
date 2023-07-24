@@ -41,7 +41,7 @@ public class PetSelection extends Gui {
             boolean enable = Boolean.parseBoolean(new ConfigManager().getPetType(type + ".enable"));
             String dname = new ConfigManager().getPetType(type + ".name");
             String id = new ConfigManager().getPetType(type + ".skullTexture");
-            if (!player.hasPermission("pet." + type.toLowerCase())) {
+            if (!player.hasPermission("pet." + type)) {
                 player.sendMessage(PetsPlus.getInstance().getConfigManager().getMessage("noPermission"));
                 player.closeInventory();
                 return;
