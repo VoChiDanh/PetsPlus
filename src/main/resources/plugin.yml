@@ -1,7 +1,7 @@
 name: PetsPlus
 main: net.danh.petsplus.PetsPlus
-author: MisterMel
-version: 1.5.2
+authors: [VoChiDanh]
+version: "${project.version}"
 description: Interactive pets for your players
 api-version: 1.13
 commands:
