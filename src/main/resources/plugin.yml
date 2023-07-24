@@ -1,16 +1,10 @@
-name: MMOCraft
-version: '${project.version}'
-main: net.danh.mmocraft.MMOCraft
-api-version: 1.16
-author: VoChiDanh
-description: Custom CraftingGUI For RPG Server
-depend:
-  - MMOItems
-  - MythicLib
-  - MMOCore
+name: PetsPlus
+main: net.danh.petsplus.PetsPlus
+author: MisterMel
+version: 1.5.2
+description: Interactive pets for your players
+api-version: 1.13
 commands:
-  MMOCraft_CraftingGUI:
-    description: CraftingGUI Command
-    aliases:
-      - CraftingGUI
-      - CGUI
+  pets:
+    description: The main command for PetsPlus.
+    aliases: [ petsplus ]
