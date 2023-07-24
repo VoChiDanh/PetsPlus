@@ -43,6 +43,7 @@ public class PetsPlus extends JavaPlugin {
         return msg;
     }
 
+    @Override
     public void onEnable() {
         instance = this;
 
@@ -64,6 +65,8 @@ public class PetsPlus extends JavaPlugin {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> petManager.tick(), 5, 5);
     }
 
+
+    @Override
     public void onDisable() {
         petManager.despawnAll();
     }

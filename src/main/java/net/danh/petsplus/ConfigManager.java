@@ -12,10 +12,10 @@ public class ConfigManager {
         this.prefix = config.contains("messages.prefix") ? (this.getString("messages.prefix") + " ") : "";
     }
 
-    private String getString(String key) {
+    public String getString(String key) {
         String msg = PetsPlus.getInstance().getConfig().getString(key);
         if (msg == null) {
-            return ChatColor.RED + "[" + key + "]";
+            return ChatColor.RED + key;
         }
 
         return ChatColor.translateAlternateColorCodes('&', msg);
@@ -31,5 +31,9 @@ public class ConfigManager {
 
     public String getGuiSetting(String key) {
         return this.getString("gui." + key);
+    }
+
+    public String getPetType(String key) {
+        return this.getString("pets." + key);
     }
 }

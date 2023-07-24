@@ -12,82 +12,68 @@ messages:
 
 gui:
   titles:
-    main: '&a&lPets'
-    options: '&a&lPets &7| Options'
+    main:
+      title: '&a&lPets'
+      size: 36
+    options:
+      title: '&a&lPets &7| Options'
+      size: 27
 
   ridePet: '&6Ride pet'
-  makeSound: '&6Make sound'
   removePet: '&cRemove pet'
-  
-  changeToBaby: '&aChange to baby'
-  changeToAdult: '&aChange to adult'
-
-settings:
-  # If set to true, pets will not make sound on their own.
-  # They can still make sound if the 'Make sound' button is pressed.
-  isSilent: true
-
-  # If set to true, pets will have a nametag visible.
-  hasNametag: true
-
-  # If set to true, all pets will be babies by default
-  isBabyDefault: false
-
-  # If set to true, players will be able to switch between adult/baby pet
-  allowAgeChange: true
 
 # You can configure each pet type below.
 # Disabling a mob type will prevent it from showing up in-game entirely.
-petTypes:
+pets:
   chicken:
     enabled: true
-    name: 'Chicken'
-    skullTexture: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTYzODQ2OWE1OTljZWVmNzIwNzUzNzYwMzI0OGE5YWIxMWZmNTkxZmQzNzhiZWE0NzM1YjM0NmE3ZmFlODkzIn19fQ=='
+    name: '&eChicken'
+    skullTexture: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjRiNTc1NjY0YjA5ZTBiODNiNmQyZjU3MDIxNGFlNjRlOThiZTY3YjM0Zjg5ZGIyZGRiMDNjYmRhYjRkNTUwYiJ9fX0='
   cow:
     enabled: true
-    name: 'Cow'
+    name: '&eCow'
     skullTexture: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvN2RmYTBhYzM3YmFiYTJhYTI5MGU0ZmFlZTQxOWE2MTNjZDYxMTdmYTU2OGU3MDlkOTAzNzQ3NTNjMDMyZGNiMCJ9fX0='
   mushroom:
     enabled: true
-    name: 'Mushroom'
+    name: '&eMushroom'
     skullTexture: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMmI1Mjg0MWYyZmQ1ODllMGJjODRjYmFiZjllMWMyN2NiNzBjYWM5OGY4ZDZiM2RkMDY1ZTU1YTRkY2I3MGQ3NyJ9fX0='
   sheep:
     enabled: true
-    name: 'Sheep'
+    name: '&eSheep'
     skullTexture: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjMxZjljY2M2YjNlMzJlY2YxM2I4YTExYWMyOWNkMzNkMThjOTVmYzczZGI4YTY2YzVkNjU3Y2NiOGJlNzAifX19'
   rabbit:
     enabled: true
-    name: 'Rabbit'
+    name: '&eRabbit'
     skullTexture: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjRkY2ZlZDY4OTdhMThhN2FiOTk1YTY2MTM0ZDQxYTFjYTgyMWI2OWJjYjdkMTRjZjI2OWI0YTk4ZGY0OWE4In19fQ=='
   ocelot:
     enabled: true
-    name: 'Ocelot'
+    name: '&eOcelot'
     skullTexture: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTY1N2NkNWMyOTg5ZmY5NzU3MGZlYzRkZGNkYzY5MjZhNjhhMzM5MzI1MGMxYmUxZjBiMTE0YTFkYjEifX19'
   pig:
     enabled: true
-    name: 'Pig'
+    name: '&ePig'
     skullTexture: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjIxNjY4ZWY3Y2I3OWRkOWMyMmNlM2QxZjNmNGNiNmUyNTU5ODkzYjZkZjRhNDY5NTE0ZTY2N2MxNmFhNCJ9fX0='
   fox:
     enabled: true
-    name: 'Fox'
+    name: '&eFox'
     skullTexture: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDg5NTRhNDJlNjllMDg4MWFlNmQyNGQ0MjgxNDU5YzE0NGEwZDVhOTY4YWVkMzVkNmQzZDczYTNjNjVkMjZhIn19fQ=='
   cat:
     enabled: true
-    name: 'Cat'
+    name: '&eCat'
     skullTexture: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmIyNTNmYzZiNjU2OTg4NDUzYTJkNzEzOGZjYTRkMWYyNzUyZjQ3NjkxZjBjNDM0ZTQzMjE4Mzc3MWNmZTEifX19'
   wolf:
     enabled: true
-    name: 'Wolf'
+    name: '&eWolf'
     skullTexture: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjlkMWQzMTEzZWM0M2FjMjk2MWRkNTlmMjgxNzVmYjQ3MTg4NzNjNmM0NDhkZmNhODcyMjMxN2Q2NyJ9fX0='
   bee:
     enabled: true
-    name: 'Bee'
+    name: '&eBee'
     skullTexture: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmQxNjU4ZmQ0OTRmOGUyMjkwZGI0MWRjNGQxMWQ0NjdjMjU5NjFlZGNhNjMzMTdlOGY5OTcxZWIyOGE0N2NjNSJ9fX0='
   polar_bear:
     enabled: true
-    name: 'Polar Bear'
+    name: '&ePolar Bear'
     skullTexture: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2Q1ZDYwYTRkNzBlYzEzNmE2NTg1MDdjZTgyZTM0NDNjZGFhMzk1OGQ3ZmNhM2Q5Mzc2NTE3YzdkYjRlNjk1ZCJ9fX0='
   iron_golem:
     enabled: true
-    name: 'Iron Golem'
+    name: '&eIron Golem'
     skullTexture: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjJiY2FjZWViNDE2MmY0MDBkNDQ3NDMzMTU5MzJhYzgyMGQzMTE5YWM4OTg2YTAxNjFhNzI2MTYxY2NjOTNmYyJ9fX0='
