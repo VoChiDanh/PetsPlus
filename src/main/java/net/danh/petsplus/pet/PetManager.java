@@ -20,6 +20,10 @@ public class PetManager {
         petEntities.put(pet.getEntity().getUniqueId(), pet);
     }
 
+    public boolean isPetActive(Player p) {
+        return pets.containsKey(p.getUniqueId()) && petEntities.containsValue(pets.get(p.getUniqueId()));
+    }
+
     public void despawnPet(Player player) {
         Pet pet = this.getPet(player);
         if (pet == null) return;
