@@ -4,6 +4,7 @@ import net.danh.petsplus.ConfigManager;
 import net.danh.petsplus.PetsPlus;
 import net.danh.petsplus.util.ItemBuilder;
 import net.danh.petsplus.util.SkullCreator;
+import net.xconfig.bukkit.model.SimpleConfigurationManager;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -24,17 +25,21 @@ public class PetSelection extends Gui {
     @Override
     public void populateInventory(Player p, Inventory inv) {
         int index = 0;
-        for (String type : PetsPlus.getInstance().getConfig().getConfigurationSection("pets").getKeys(false)) {
+        for (String type : SimpleConfigurationManager.get().get("config.yml").getConfigurationSection("pets").getKeys(false)) {
             boolean enable = Boolean.parseBoolean(new ConfigManager().getPetType(type + ".enabled"));
             if (enable) {
                 String name = new ConfigManager().getPetType(type + ".name");
                 String id = new ConfigManager().getPetType(type + ".skullTexture");
                 if (new ConfigManager().getConfig().contains("pets." + type + ".lore")) {
                     List<String> lore = new ConfigManager().getConfig().getStringList("pets." + type + ".lore");
-                    inv.setItem(index, new ItemBuilder(SkullCreator.itemFromBase64(id)).setName(new ConfigManager().getString(name)).setLore(lore).get());
-                } else
-                    inv.setItem(index, new ItemBuilder(SkullCreator.itemFromBase64(id)).setName(new ConfigManager().getString(name)).get());
-                item.put(new ItemBuilder(SkullCreator.itemFromBase64(id)).setName(new ConfigManager().getString(name)).get(), index);
+                    ItemStack itemStack = new ItemBuilder(SkullCreator.itemFromBase64(id)).setName(new ConfigManager().getString(name)).setLore(lore).get();
+                    inv.setItem(index, itemStack);
+                    item.put(itemStack, index);
+                } else {
+                    ItemStack itemStack = new ItemBuilder(SkullCreator.itemFromBase64(id)).setName(new ConfigManager().getString(name)).get();
+                    inv.setItem(index, itemStack);
+                    item.put(itemStack, index);
+                    }
                 slot.put(index, type);
                 index++;
             }

@@ -1,5 +1,6 @@
 package net.danh.petsplus;
 
+import net.xconfig.bukkit.model.SimpleConfigurationManager;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 
@@ -11,12 +12,12 @@ public class ConfigManager {
     private final String prefix;
 
     public ConfigManager() {
-        FileConfiguration config = PetsPlus.getInstance().getConfig();
+        FileConfiguration config = SimpleConfigurationManager.get().get("config.yml");
         this.prefix = config.contains("messages.prefix") ? (this.getString("messages.prefix") + " ") : "";
     }
 
     public String getString(String key) {
-        String msg = PetsPlus.getInstance().getConfig().getString(key);
+        String msg = SimpleConfigurationManager.get().get("config.yml").getString(key);
         if (msg == null) {
             return ChatColor.RED + key;
         }
@@ -29,7 +30,7 @@ public class ConfigManager {
     }
 
     public boolean getSetting(String key) {
-        return PetsPlus.getInstance().getConfig().getBoolean("settings." + key);
+        return SimpleConfigurationManager.get().get("config.yml").getBoolean("settings." + key);
     }
 
     public String getGuiSetting(String key) {
@@ -49,6 +50,6 @@ public class ConfigManager {
     }
 
     public FileConfiguration getConfig() {
-        return PetsPlus.getInstance().getConfig();
+        return SimpleConfigurationManager.get().get("config.yml");
     }
 }

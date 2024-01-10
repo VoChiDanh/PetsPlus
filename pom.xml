@@ -79,6 +79,10 @@
 			<id>phoenix</id>
 			<url>https://nexus.phoenixdevt.fr/repository/maven-public/</url>
 		</repository>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
 	</repositories>
 	
 	<dependencies>
@@ -99,6 +103,12 @@
 			<artifactId>MythicLib-dist</artifactId>
 			<version>1.6.2-SNAPSHOT</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.github.InitSync.XConfig</groupId>
+			<artifactId>bukkit</artifactId>
+			<version>1.1.7</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.mojang</groupId>

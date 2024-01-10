@@ -6,6 +6,7 @@ import net.danh.petsplus.gui.PetSelection;
 import net.danh.petsplus.listener.EntityListener;
 import net.danh.petsplus.listener.InventoryListener;
 import net.danh.petsplus.pet.PetManager;
+import net.xconfig.bukkit.model.SimpleConfigurationManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
@@ -13,8 +14,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.io.File;
 
 public class PetsPlus extends JavaPlugin {
 
@@ -46,11 +45,8 @@ public class PetsPlus extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-
-        if (!new File(getDataFolder(), "config.yml").exists()) {
-            saveDefaultConfig();
-        }
-
+        SimpleConfigurationManager.register(this);
+        SimpleConfigurationManager.get().build("", false, "config.yml");
         this.configManager = new ConfigManager();
         this.petManager = new PetManager();
         this.guiManager = new GuiManager();
@@ -75,17 +71,30 @@ public class PetsPlus extends JavaPlugin {
     @Override
     public void onDisable() {
         petManager.despawnAll();
+        SimpleConfigurationManager.get().save("config.yml");
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (!(sender instanceof Player player)) {
-            sender.sendMessage(configManager.getMessage("playersOnly"));
+        if (args.length == 0) {
+            if (!(sender instanceof Player player)) {
+                sender.sendMessage(configManager.getMessage("playersOnly"));
+                return true;
+            }
+
+            guiManager.getGui(petManager.getPet(player) != null ? PetOptions.class : PetSelection.class).open(player);
+            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 5, 10);
             return true;
+
         }
-
-        guiManager.getGui(petManager.getPet(player) != null ? PetOptions.class : PetSelection.class).open(player);
-        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 5, 10);
-
+        if (args.length == 1) {
+            if (sender.hasPermission("pp.admin")) {
+                if (args[0].equalsIgnoreCase("reload")) {
+                    SimpleConfigurationManager.get().reload("config.yml");
+                    sender.sendMessage(new ConfigManager().color("&aReloaded"));
+                    return true;
+                }
+            }
+        }
         return true;
     }
 
