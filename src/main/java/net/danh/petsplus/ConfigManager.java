@@ -3,6 +3,9 @@ package net.danh.petsplus;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class ConfigManager {
 
     private final String prefix;
@@ -33,7 +36,19 @@ public class ConfigManager {
         return this.getString("gui." + key);
     }
 
+    public String color(String key) {
+        return ChatColor.translateAlternateColorCodes('&', key);
+    }
+
+    public List<String> listColor(List<String> key) {
+        return key.stream().map(this::color).collect(Collectors.toList());
+    }
+
     public String getPetType(String key) {
         return this.getString("pets." + key);
+    }
+
+    public FileConfiguration getConfig() {
+        return PetsPlus.getInstance().getConfig();
     }
 }

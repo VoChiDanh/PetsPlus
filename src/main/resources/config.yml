@@ -29,6 +29,17 @@ pets:
     enabled: true
     name: '&eChicken'
     skullTexture: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjRiNTc1NjY0YjA5ZTBiODNiNmQyZjU3MDIxNGFlNjRlOThiZTY3YjM0Zjg5ZGIyZGRiMDNjYmRhYjRkNTUwYiJ9fX0='
+    stats:
+      ATTACK_DAMAGE: 5
+      CRITICAL_STRIKE_CHANCE: 10
+      CRITICAL_STRIKE_POWER: 20
+      PVE_DAMAGE: 50
+    lore:
+      - "&fBuff Stats:"
+      - "&7Attack Damage:&e 5"
+      - "&7Critical Chance:&e 10"
+      - "&7Critical Power:&e 20"
+      - "&7PvE Damage:&e 50"
   cow:
     enabled: true
     name: '&eCow'

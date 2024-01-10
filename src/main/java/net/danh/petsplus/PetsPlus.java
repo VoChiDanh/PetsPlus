@@ -62,7 +62,13 @@ public class PetsPlus extends JavaPlugin {
         guiManager.registerGui(PetSelection.class, new PetSelection());
         guiManager.registerGui(PetOptions.class, new PetOptions());
 
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> petManager.tick(), 5, 5);
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
+            for (Player p : Bukkit.getOnlinePlayers()) {
+                if (petManager.isPetActive(p)) {
+                    petManager.tick();
+                }
+            }
+        }, 5, 5);
     }
 
 
@@ -73,7 +79,7 @@ public class PetsPlus extends JavaPlugin {
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (!(sender instanceof Player player)) {
-            sender.sendMessage(configManager.getMessage("player-only"));
+            sender.sendMessage(configManager.getMessage("playersOnly"));
             return true;
         }
 

@@ -29,14 +29,14 @@ public class EntityListener implements Listener {
     @EventHandler
     public void onInteract(PlayerArmorStandManipulateEvent e) {
         ArmorStand armorStand = e.getRightClicked();
-            Pet pet = PetsPlus.getInstance().getPetManager().getPet(armorStand);
-            if (pet != null) {
-                e.setCancelled(true);
+        Pet pet = PetsPlus.getInstance().getPetManager().getPet(armorStand);
+        if (pet != null) {
+            e.setCancelled(true);
 
-                if (pet.getOwner() == e.getPlayer()) {
-                    PetsPlus.getInstance().getGuiManager().getGui(PetOptions.class).open(e.getPlayer());
-                }
+            if (pet.getOwner() == e.getPlayer()) {
+                PetsPlus.getInstance().getGuiManager().getGui(PetOptions.class).open(e.getPlayer());
             }
+        }
     }
 
     @EventHandler

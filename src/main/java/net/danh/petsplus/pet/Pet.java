@@ -9,10 +9,10 @@ import org.bukkit.entity.Player;
 
 public class Pet {
 
-    private ArmorStand entity;
-    private Player owner;
     private final String id;
     private final String name;
+    private ArmorStand entity;
+    private Player owner;
 
     protected Pet(Player owner, String name, String id) {
         this.owner = owner;

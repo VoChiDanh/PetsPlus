@@ -1,5 +1,6 @@
 package net.danh.petsplus.util;
 
+import net.danh.petsplus.ConfigManager;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -12,13 +13,14 @@ import java.util.List;
 public class ItemBuilder {
 
     private final ItemStack item;
-    private final List<String> lore = new ArrayList<>();
+    private List<String> lore = new ArrayList<>();
     private String name;
     private boolean hideAttributes;
 
     public ItemBuilder(Material material) {
         this.item = new ItemStack(material);
     }
+
     public ItemBuilder(ItemStack itemStack) {
         this.item = itemStack;
     }
@@ -49,6 +51,11 @@ public class ItemBuilder {
         String[] lores = lore.split("\\\\n");
         Collections.addAll(this.lore, lores);
 
+        return this;
+    }
+
+    public ItemBuilder setLore(List<String> listLore) {
+        this.lore = new ConfigManager().listColor(listLore);
         return this;
     }
 

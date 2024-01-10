@@ -10,6 +10,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class PetSelection extends Gui {
 
@@ -24,13 +25,19 @@ public class PetSelection extends Gui {
     public void populateInventory(Player p, Inventory inv) {
         int index = 0;
         for (String type : PetsPlus.getInstance().getConfig().getConfigurationSection("pets").getKeys(false)) {
-            boolean enable = Boolean.parseBoolean(new ConfigManager().getPetType(type + ".enable"));
-            String name = new ConfigManager().getPetType(type + ".name");
-            String id = new ConfigManager().getPetType(type + ".skullTexture");
-            inv.setItem(index, new ItemBuilder(SkullCreator.itemFromBase64(id)).setName(new ConfigManager().getString(name)).get());
-            item.put(new ItemBuilder(SkullCreator.itemFromBase64(id)).setName(new ConfigManager().getString(name)).get(), index);
-            slot.put(index, type);
-            index++;
+            boolean enable = Boolean.parseBoolean(new ConfigManager().getPetType(type + ".enabled"));
+            if (enable) {
+                String name = new ConfigManager().getPetType(type + ".name");
+                String id = new ConfigManager().getPetType(type + ".skullTexture");
+                if (new ConfigManager().getConfig().contains("pets." + type + ".lore")) {
+                    List<String> lore = new ConfigManager().getConfig().getStringList("pets." + type + ".lore");
+                    inv.setItem(index, new ItemBuilder(SkullCreator.itemFromBase64(id)).setName(new ConfigManager().getString(name)).setLore(lore).get());
+                } else
+                    inv.setItem(index, new ItemBuilder(SkullCreator.itemFromBase64(id)).setName(new ConfigManager().getString(name)).get());
+                item.put(new ItemBuilder(SkullCreator.itemFromBase64(id)).setName(new ConfigManager().getString(name)).get(), index);
+                slot.put(index, type);
+                index++;
+            }
         }
     }
 
@@ -38,24 +45,26 @@ public class PetSelection extends Gui {
     public void onClick(Player player, ItemStack item) {
         if (this.item.containsKey(item)) {
             String type = slot.get(this.item.get(item));
-            boolean enable = Boolean.parseBoolean(new ConfigManager().getPetType(type + ".enable"));
+            boolean enable = Boolean.parseBoolean(new ConfigManager().getPetType(type + ".enabled"));
             String dname = new ConfigManager().getPetType(type + ".name");
             String id = new ConfigManager().getPetType(type + ".skullTexture");
-            if (!player.hasPermission("pet." + type)) {
-                player.sendMessage(PetsPlus.getInstance().getConfigManager().getMessage("noPermission"));
+            if (enable && id != null) {
+                if (!player.hasPermission("pet." + type)) {
+                    player.sendMessage(PetsPlus.getInstance().getConfigManager().getMessage("noPermission"));
+                    player.closeInventory();
+                    return;
+                }
+
+                if (PetsPlus.getInstance().getPetManager().getPet(player) != null) {
+                    return;
+                }
+
+                PetsPlus.getInstance().getPetManager().spawnPet(player, type);
+
+                player.sendMessage(PetsPlus.messageArgs("spawnedPet", dname));
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 5, 10);
                 player.closeInventory();
-                return;
             }
-
-            if (PetsPlus.getInstance().getPetManager().getPet(player) != null) {
-                return;
-            }
-
-            PetsPlus.getInstance().getPetManager().spawnPet(player, type);
-
-            player.sendMessage(PetsPlus.messageArgs("spawnedPet", dname));
-            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 5, 10);
-            player.closeInventory();
         }
     }
 
